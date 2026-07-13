@@ -85,9 +85,9 @@ Access enum is `"none" | "read" | "readwrite"` (**not** `rw`/`ro`).
 
 ## Findings
 
-See [`docs/FINDINGS.md`](docs/FINDINGS.md) for two isolation-route observations
-uncovered while building this demo (search-path vs upsert/query-path tenant
-scoping, and the access-enum gotcha). Both are candidate issues for
+See [`docs/FINDINGS.md`](docs/FINDINGS.md) for an access-enum gotcha uncovered
+while building this demo (`/pools/declare` silently accepts invalid access
+strings like `"rw"` → read-only fallback). Candidate issue for
 `rick-stevens-ai/falda`.
 
 ## Files
