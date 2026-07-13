@@ -73,7 +73,7 @@ tool), then hand knowledge across via the shared pool. See
 | `GET /healthz` | — | `{ok, tiers}` |
 | `POST /stream/add` | `{tenant, session_id, messages[]}` | T0 write |
 | `POST /stream/search` | `{tenant, query, limit}` | `{messages[]}` (lexical/recency) |
-| `POST /atoms/search` | `{tenant, query, limit}` | `{items[]}` (semantic, **tenant-isolated**) |
+| `POST /atoms/search` | `{tenant, query, limit}` | `{items[]}` (semantic) |
 | `POST /atoms/upsert` | `{tenant, [pool], type, content}` | atom (write) |
 | `POST /atoms/query` | `{tenant, [pool], query, limit}` | `{items[]}` |
 | `POST /core/read` | `{tenant}` | `{content}` (T3 persona) |
@@ -95,4 +95,4 @@ strings like `"rw"` → read-only fallback). Candidate issue for
 - `falda_demo.sh` — the canonical 10-beat demo (Kukla).
 - `alt/falda_demo_ollie.sh` — Ollie's original pure-stdlib driver, preserved.
 - `docs/TWO_AGENT_DEMO.md` — fully-live two-agent runbook.
-- `docs/FINDINGS.md` — isolation-route findings for the FALDA server.
+- `docs/FINDINGS.md` — pool access-enum finding for the FALDA server.
