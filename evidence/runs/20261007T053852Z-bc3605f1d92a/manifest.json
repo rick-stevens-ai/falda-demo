@@ -1,0 +1,86 @@
+{
+  "cleanup": {
+    "action": "All generated IDs are listed here for manual cleanup.",
+    "supported": false
+  },
+  "gateway": "http://100.86.220.115:8079",
+  "generated_ids": [
+    {
+      "id": "falda-family-20261007053852-bc3605f1d92a",
+      "kind": "pool"
+    },
+    {
+      "id": "session-20261007T053852Z-bc3605f1d92a",
+      "kind": "session"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-lexical-lantern",
+      "kind": "token"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-semantic-target",
+      "kind": "token"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-semantic-distractor",
+      "kind": "token"
+    },
+    {
+      "id": "f7ca5e44-3185-4d1c-8bb6-af70ab48d900",
+      "kind": "atom"
+    },
+    {
+      "id": "56003c72-2b33-4f92-83a4-1280035a3ae3",
+      "kind": "atom"
+    },
+    {
+      "id": "family-demo/20261007T053852Z-bc3605f1d92a.md",
+      "kind": "scene"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-private-alpha",
+      "kind": "token"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-private-bravo",
+      "kind": "token"
+    },
+    {
+      "id": "0c0825f9-85ed-4225-8f08-6764ba3531dd",
+      "kind": "atom"
+    },
+    {
+      "id": "72d5130e-1611-4ea1-b5ba-20b589879f9a",
+      "kind": "atom"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-shared-alpha-delta",
+      "kind": "token"
+    },
+    {
+      "id": "9504a7c5-edd5-491c-ad8b-b6aad9b04eab",
+      "kind": "atom"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-denied-read-write",
+      "kind": "token"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-denied-none-write",
+      "kind": "token"
+    },
+    {
+      "id": "20261007T053852Z-bc3605f1d92a-ATOMIC-FAIL",
+      "kind": "token"
+    }
+  ],
+  "run_id": "20261007T053852Z-bc3605f1d92a",
+  "schema_version": 1,
+  "tenants": [
+    "demo-ikto",
+    "demo-yeil",
+    "demo-tsisdu",
+    "demo-kukla",
+    "demo-ollie"
+  ]
+}

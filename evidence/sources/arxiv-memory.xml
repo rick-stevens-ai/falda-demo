@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/1ag8XvlVVeGohQCdXVFzlCK+NXU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2310.08560,2304.03442,2005.11401&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T05:35:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2310.08560,2304.03442,2005.11401" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2310.08560v2</id>
+    <title>MemGPT: Towards LLMs as Operating Systems</title>
+    <updated>2024-02-12T18:59:46Z</updated>
+    <link href="https://arxiv.org/abs/2310.08560v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.08560v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have revolutionized AI, but are constrained by limited context windows, hindering their utility in tasks like extended conversations and document analysis. To enable using context beyond limited context windows, we propose virtual context management, a technique drawing inspiration from hierarchical memory systems in traditional operating systems that provide the appearance of large memory resources through data movement between fast and slow memory. Using this technique, we introduce MemGPT (Memory-GPT), a system that intelligently manages different memory tiers in order to effectively provide extended context within the LLM's limited context window, and utilizes interrupts to manage control flow between itself and the user. We evaluate our OS-inspired design in two domains where the limited context windows of modern LLMs severely handicaps their performance: document analysis, where MemGPT is able to analyze large documents that far exceed the underlying LLM's context window, and multi-session chat, where MemGPT can create conversational agents that remember, reflect, and evolve dynamically through long-term interactions with their users. We release MemGPT code and data for our experiments at https://memgpt.ai.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-12T17:51:32Z</published>
+    <arxiv:comment>Code and data available at https://research.memgpt.ai</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Charles Packer</name>
+    </author>
+    <author>
+      <name>Sarah Wooders</name>
+    </author>
+    <author>
+      <name>Kevin Lin</name>
+    </author>
+    <author>
+      <name>Vivian Fang</name>
+    </author>
+    <author>
+      <name>Shishir G. Patil</name>
+    </author>
+    <author>
+      <name>Ion Stoica</name>
+    </author>
+    <author>
+      <name>Joseph E. Gonzalez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.03442v2</id>
+    <title>Generative Agents: Interactive Simulacra of Human Behavior</title>
+    <updated>2023-08-06T00:21:19Z</updated>
+    <link href="https://arxiv.org/abs/2304.03442v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.03442v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Believable proxies of human behavior can empower interactive applications ranging from immersive environments to rehearsal spaces for interpersonal communication to prototyping tools. In this paper, we introduce generative agents--computational software agents that simulate believable human behavior. Generative agents wake up, cook breakfast, and head to work; artists paint, while authors write; they form opinions, notice each other, and initiate conversations; they remember and reflect on days past as they plan the next day. To enable generative agents, we describe an architecture that extends a large language model to store a complete record of the agent's experiences using natural language, synthesize those memories over time into higher-level reflections, and retrieve them dynamically to plan behavior. We instantiate generative agents to populate an interactive sandbox environment inspired by The Sims, where end users can interact with a small town of twenty five agents using natural language. In an evaluation, these generative agents produce believable individual and emergent social behaviors: for example, starting with only a single user-specified notion that one agent wants to throw a Valentine's Day party, the agents autonomously spread invitations to the party over the next two days, make new acquaintances, ask each other out on dates to the party, and coordinate to show up for the party together at the right time. We demonstrate through ablation that the components of our agent architecture--observation, planning, and reflection--each contribute critically to the believability of agent behavior. By fusing large language models with computational, interactive agents, this work introduces architectural and interaction patterns for enabling believable simulations of human behavior.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-07T01:55:19Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Joon Sung Park</name>
+    </author>
+    <author>
+      <name>Joseph C. O'Brien</name>
+    </author>
+    <author>
+      <name>Carrie J. Cai</name>
+    </author>
+    <author>
+      <name>Meredith Ringel Morris</name>
+    </author>
+    <author>
+      <name>Percy Liang</name>
+    </author>
+    <author>
+      <name>Michael S. Bernstein</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.11401v4</id>
+    <title>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</title>
+    <updated>2021-04-12T15:42:18Z</updated>
+    <link href="https://arxiv.org/abs/2005.11401v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.11401v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-22T21:34:34Z</published>
+    <arxiv:comment>Accepted at NeurIPS 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Patrick Lewis</name>
+    </author>
+    <author>
+      <name>Ethan Perez</name>
+    </author>
+    <author>
+      <name>Aleksandra Piktus</name>
+    </author>
+    <author>
+      <name>Fabio Petroni</name>
+    </author>
+    <author>
+      <name>Vladimir Karpukhin</name>
+    </author>
+    <author>
+      <name>Naman Goyal</name>
+    </author>
+    <author>
+      <name>Heinrich Küttler</name>
+    </author>
+    <author>
+      <name>Mike Lewis</name>
+    </author>
+    <author>
+      <name>Wen-tau Yih</name>
+    </author>
+    <author>
+      <name>Tim Rocktäschel</name>
+    </author>
+    <author>
+      <name>Sebastian Riedel</name>
+    </author>
+    <author>
+      <name>Douwe Kiela</name>
+    </author>
+  </entry>
+</feed>

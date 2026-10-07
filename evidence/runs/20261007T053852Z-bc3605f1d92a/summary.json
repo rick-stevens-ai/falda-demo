@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "name": "seed_fixtures",
+      "status": "pass"
+    },
+    {
+      "detail": "target recovered by meaning",
+      "name": "semantic_paraphrase",
+      "status": "pass"
+    },
+    {
+      "detail": "target_rank=2; distractor_rank=4",
+      "name": "semantic_target_ranks_ahead_of_distractor",
+      "status": "pass"
+    },
+    {
+      "detail": "seeded raw turn returned",
+      "name": "tier_t0",
+      "status": "pass"
+    },
+    {
+      "detail": "seeded typed atom returned",
+      "name": "tier_t1",
+      "status": "pass"
+    },
+    {
+      "detail": "run-scoped scene round-tripped",
+      "name": "tier_t2",
+      "status": "pass"
+    },
+    {
+      "detail": "run-scoped core round-tripped",
+      "name": "tier_t3",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "gateway_health",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "isolation_alpha_to_bravo",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "isolation_bravo_to_alpha",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "pool_declare",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "pool_grant_readwrite",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "pool_grant_read",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "pool_grant_none",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "acl_readwrite_write",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "cross_agent_shared_read",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "acl_read_read",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "acl_read_write_denied",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "acl_none_read_denied",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "acl_none_write_denied",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "private_nonleakage",
+      "status": "pass"
+    },
+    {
+      "detail": "write_status=403; persisted=False",
+      "name": "operation_atomicity",
+      "status": "pass"
+    },
+    {
+      "detail": "10 requests",
+      "name": "concurrency",
+      "status": "pass"
+    }
+  ],
+  "failed_checks": [],
+  "hard_failures": [],
+  "latency_ms": {
+    "p50": 51.684,
+    "p95": 88.562,
+    "samples": 10
+  },
+  "run_id": "20261007T053852Z-bc3605f1d92a",
+  "schema_version": 1,
+  "status": "pass"
+}

@@ -47,6 +47,22 @@ FALDA_URL=http://<tailnet-aggregator>:8078 FALDA_TENANT=kukla FALDA_TENANT_B=oll
 
 Expected: **10 PASS / 0 FAIL**. Pure-stdlib Python driver — no `curl`/`jq` needed.
 
+## Deterministic five-agent experiment harness
+
+For repeatable gateway qualification with raw evidence, run the stdlib harness:
+
+```bash
+FALDA_URL=http://gateway.example:8078 \
+FALDA_FAMILY_TENANTS=demo-a,demo-b,demo-c,demo-d,demo-e \
+./falda_family_experiment.sh
+```
+
+It checks five-agent ACLs and isolation, semantic-vs-lexical fixtures, failed-write
+atomicity, supported T0–T3 APIs, and concurrent p50/p95 latency. Every run writes
+raw JSONL exchanges, a generated-ID manifest, and `summary.json` under `runs/`.
+See [`docs/FAMILY_EXPERIMENT.md`](docs/FAMILY_EXPERIMENT.md) for safety,
+interpretation, and deterministic fake-gateway testing.
+
 ## The headline beat — cross-session recall (manual)
 
 The automated script proves the mechanics. The beat that lands with any audience
@@ -93,6 +109,9 @@ strings like `"rw"` → read-only fallback). Candidate issue for
 ## Files
 
 - `falda_demo.sh` — the canonical 10-beat demo (Kukla).
+- `falda_experiment.py` / `falda_family_experiment.sh` — deterministic five-agent harness.
+- `tests/test_falda_experiment.py` — stdlib fake-gateway integration tests.
+- `docs/FAMILY_EXPERIMENT.md` — experiment runbook and evidence contract.
 - `alt/falda_demo_ollie.sh` — Ollie's original pure-stdlib driver, preserved.
 - `docs/TWO_AGENT_DEMO.md` — fully-live two-agent runbook.
 - `docs/FINDINGS.md` — pool access-enum finding for the FALDA server.
