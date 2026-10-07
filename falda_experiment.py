@@ -57,6 +57,11 @@ class Experiment:
     def token(self, label: str) -> str:
         return self.generated("token", f"{self.run_id}-{label}")
 
+    def pool_name(self) -> str:
+        # Pool IDs are limited to 64 lowercase [a-z0-9_-] characters.
+        compact = self.run_id.lower().replace("t", "").replace("z", "")
+        return self.generated("pool", f"{self.config.pool_prefix}-{compact}"[:64])
+
     def write_manifest(self) -> Path:
         self.run_dir.mkdir(parents=True, exist_ok=True)
         path = self.run_dir / "manifest.json"
@@ -131,7 +136,7 @@ class Experiment:
             raise ValueError("tenant names must be unique")
         self.run_dir.mkdir(parents=True, exist_ok=False)
         alpha, bravo, charlie, delta, echo = self.config.tenants
-        pool = self.generated("pool", f"{self.config.pool_prefix}-{self.run_id}")
+        pool = self.pool_name()
 
         health = self.call("GET", "/healthz")
         health_ok = health.status == 200 and isinstance(health.body, dict) and bool(health.body.get("ok"))
@@ -151,21 +156,37 @@ class Experiment:
 
         semantic = self.call("POST", "/atoms/search", {"tenant": alpha, "query": "which ocean-colored cup holds the morning drink", "limit": 5})
         self.check("semantic_paraphrase", self.contains(semantic, target), "target recovered by meaning")
-        self.check("lexical_distractor", not self.contains(semantic, distractor), "topic distractor excluded")
+        semantic_items = self.items(semantic)
+        target_rank = next((i + 1 for i, item in enumerate(semantic_items) if target in item.get("content", "")), None)
+        distractor_rank = next((i + 1 for i, item in enumerate(semantic_items) if distractor in item.get("content", "")), None)
+        self.check("semantic_target_ranks_ahead_of_distractor",
+                   target_rank is not None and (distractor_rank is None or target_rank < distractor_rank),
+                   f"target_rank={target_rank}; distractor_rank={distractor_rank}")
 
         lexical_result = self.call("POST", "/stream/search", {"tenant": alpha, "query": lexical, "limit": 5})
         self.check("tier_t0", self.contains(lexical_result, lexical, "messages"), "seeded raw turn returned")
         self.check("tier_t1", self.contains(semantic, target), "seeded typed atom returned")
 
-        # T2 is not present in every deployed API; 404/405 is an explicit skip.
-        scene = self.call("POST", "/scenes/search", {"tenant": alpha, "query": "agents decisions outcomes", "limit": 3})
-        if scene.status in (404, 405):
-            self.check("tier_t2", None, "API unsupported")
-        else:
-            self.check("tier_t2", scene.status == 200 and bool(self.items(scene)), "substantive scene returned")
-        core = self.call("POST", "/core/read", {"tenant": alpha})
-        core_content = core.body.get("content", "") if isinstance(core.body, dict) else ""
-        self.check("tier_t3", core.status == 200 and len(core_content.strip()) >= 50, "core content >= 50 chars")
+        # Seed and round-trip substantive, run-scoped T2/T3 fixtures. This avoids
+        # claiming tier coverage from unrelated pre-existing production content.
+        scene_path = self.generated("scene", f"family-demo/{self.run_id}.md")
+        scene_text = f"FALDA family scene {self.run_id}: five keepers reconstruct a synthetic instrument incident."
+        scene_write = self.call("POST", "/scenes/write", {"tenant": alpha, "path": scene_path, "content": scene_text})
+        scene_read = self.call("POST", "/scenes/read", {"tenant": alpha, "path": scene_path})
+        scene_content = scene_read.body.get("content", "") if isinstance(scene_read.body, dict) else ""
+        self.check("tier_t2", scene_write.status == 200 and scene_read.status == 200 and scene_text == scene_content,
+                   "run-scoped scene round-tripped")
+
+        core_before = self.call("POST", "/core/read", {"tenant": echo})
+        old_core = core_before.body.get("content", "") if isinstance(core_before.body, dict) else ""
+        core_text = f"FALDA family core {self.run_id}: preserve evidence, identity, and explicit sharing boundaries."
+        core_write = self.call("POST", "/core/write", {"tenant": echo, "content": core_text})
+        core_read = self.call("POST", "/core/read", {"tenant": echo})
+        core_content = core_read.body.get("content", "") if isinstance(core_read.body, dict) else ""
+        self.check("tier_t3", core_write.status == 200 and core_read.status == 200 and core_content == core_text,
+                   "run-scoped core round-tripped")
+        # Restore any prior core immediately; a disposable tenant normally had none.
+        self.call("POST", "/core/write", {"tenant": echo, "content": old_core})
         self.check("gateway_health", health_ok)
 
         # Private isolation in both directions.

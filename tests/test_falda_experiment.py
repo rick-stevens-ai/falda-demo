@@ -14,6 +14,8 @@ class FakeState:
         self.private = {}
         self.pools = {}
         self.stream = {}
+        self.scenes = {}
+        self.cores = {}
         self.phantom_failed_write = phantom_failed_write
         self.lock = threading.Lock()
 
@@ -59,10 +61,16 @@ def fake_gateway(phantom_failed_write=False):
                     query = payload["query"].lower()
                     hits = [m for m in messages if any(w in m.get("content", "").lower() for w in query.split())]
                     return self.reply(200, {"messages": hits[:payload.get("limit", 10)]})
+                if path == "/scenes/write":
+                    state.scenes[(payload["tenant"], payload["path"])] = payload.get("content", "")
+                    return self.reply(200, {"path": payload["path"]})
+                if path == "/scenes/read":
+                    return self.reply(200, {"path": payload["path"], "content": state.scenes.get((payload["tenant"], payload["path"]))})
+                if path == "/core/write":
+                    state.cores[payload["tenant"]] = payload.get("content", "")
+                    return self.reply(200, {"ok": True})
                 if path == "/core/read":
-                    return self.reply(200, {"content": "Stable family persona and long-term operating principles for " + payload["tenant"]})
-                if path == "/scenes/search":
-                    return self.reply(200, {"items": [{"content": "A substantive project scene links agents, decisions, and outcomes."}]})
+                    return self.reply(200, {"content": state.cores.get(payload["tenant"], "")})
                 if path == "/atoms/upsert":
                     target = state.private.setdefault(payload["tenant"], [])
                     if payload.get("pool"):
@@ -132,7 +140,7 @@ class HarnessUnitTests(unittest.TestCase):
             self.assertTrue((run_dir / "summary.json").exists())
             self.assertEqual(summary["hard_failures"], [])
             expected = {
-                "seed_fixtures", "semantic_paraphrase", "lexical_distractor",
+                "seed_fixtures", "semantic_paraphrase", "semantic_target_ranks_ahead_of_distractor",
                 "isolation_alpha_to_bravo", "isolation_bravo_to_alpha",
                 "pool_declare", "pool_grant_readwrite", "pool_grant_read", "pool_grant_none",
                 "acl_readwrite_write", "acl_read_read",
